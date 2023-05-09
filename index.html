@@ -10,26 +10,30 @@
 </head>
 
 <body>
-
+<!--app collegato con vue js-->
     <div id="app">
-
         <div class="container">
+            <!--uso operatore ternerio cambia in base al valore iniziale di play-->
+            <button @click="autoPlay">Auto play{{ play==null ? ' ON' : ' OFF'}}</button>
             <div class="slider-wrapper" tabindex="0">
+<!--parte grande-->
                 <div class="item">
                     <img :src="card[active].image" alt="Spiderman" />
                     <div class="text">
+                        <!--active valore  iniziale 0 viene cambiato al pulsante e in automatica mi cambia anche le scritte-->
                         <h3>{{card[active].title}}</h3>
                         <p>
                            {{card[active].text}}
                         </p>
                     </div>
                 </div>
-                
+<!--parti piccole laterali-->
                 <div class="thumbs">
                     <button  class="prev" @click="proxSlide()"></button>
                     <button class="next" @click="prevSlide"></button>
+<!--template non si vede in pagina-->
                     <template v-for="(posto, indice) in card ">
-                        <div :class ="(active == indice) ? 'thumb active':'thumb '">    
+                        <div :class ="(active == indice) ? 'thumb active':'thumb'" @click="changeSlide(indice)">
                             <img :src="posto.image" alt="Svezia" />
                         </div>
                     </template>

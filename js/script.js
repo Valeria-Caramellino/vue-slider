@@ -1,11 +1,11 @@
-console.log("ciao")
 const {createApp} = Vue
   
 createApp({
     data() {
       return {
+        play: null,
         active: 0,
-        card: [
+        card:[
             {
                 image: 'img/01.webp',
                 title: 'Marvel\'s Spiderman Miles Morale',
@@ -36,20 +36,38 @@ createApp({
       }
     },
     methods: {
+        //agiamo con il this.quello che ci serve
+        //active come indice mi cambia indice sia testi che slide in un unico metodo
         proxSlide(){
-            
             if(this.active==4){
                 this.active=0
             }else{
                 this.active++
             }
         },
+        
         prevSlide(){
             if(this.active==0){
                 this.active= 4
             }else{
                this.active-- 
             }
+        },
+        //cambio slide al click img selezionata
+        changeSlide(indice){
+            this.active= indice;
+        },
+        //auto play interval con chiusura di riporto valori iniziale
+        autoPlay(){
+            if(this.play==null){
+                this.play = setInterval(()=> {
+                    this.proxSlide();
+                }, 600);
+            }else{
+                clearInterval(this.play);
+                this.play=null;
+            }
+
         }
     }
 
