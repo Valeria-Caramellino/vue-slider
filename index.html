@@ -15,7 +15,12 @@
         <div class="container">
             <!--uso operatore ternerio cambia in base al valore iniziale di play-->
             <button @click="autoPlay">Auto play{{ play==null ? ' ON' : ' OFF'}}</button>
-            <div class="slider-wrapper" tabindex="0">
+            <!--
+                keyup fa cambiare la slide x ogni tasto che noi premiamo
+                se noi aggiungiamo .up ad esempio l'evento è collegato a quello specifivo elemento della tastiera.
+                keyup va perchè c'è il tabindex.
+            -->
+            <div class="slider-wrapper" tabindex="0" @keyup="proxSlide">
 <!--parte grande-->
                 <div class="item">
                     <img :src="card[active].image" alt="Spiderman" />
@@ -32,9 +37,9 @@
                     <button  class="prev" @click="proxSlide()"></button>
                     <button class="next" @click="prevSlide"></button>
 <!--template non si vede in pagina-->
-                    <template v-for="(posto, indice) in card ">
+                    <template v-for="(datoCorrente, indice) in card ">
                         <div :class ="(active == indice) ? 'thumb active':'thumb'" @click="changeSlide(indice)">
-                            <img :src="posto.image" alt="Svezia" />
+                            <img :src="datoCorrente.image" alt="Svezia" />
                         </div>
                     </template>
                 </div>
